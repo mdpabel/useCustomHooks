@@ -1,9 +1,9 @@
-import { useCallback, useState } from "react";
+const { useState, useCallback, useDebugValue } = require("react");
 
 function useForm(initialValues) {
   const [values, setValues] = useState(initialValues);
 
-  console.log("values");
+  useDebugValue(`state of useForm`);
 
   const onChange = (e) => {
     setValues((prevValue) => ({
@@ -13,19 +13,15 @@ function useForm(initialValues) {
   };
 
   const onSubmit = useCallback(
-    (e) => {
+    (e, cb) => {
       e.preventDefault();
-      console.log("onSubmit");
-      console.log(values);
+      setValues(initialValues);
+      return cb ? cb() : null;
     },
-    [values]
+    [initialValues]
   );
 
-  return {
-    values,
-    onChange,
-    onSubmit,
-  };
+  return { values, onChange, onSubmit };
 }
 
-export default useForm;
+export { useForm };
