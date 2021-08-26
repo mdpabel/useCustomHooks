@@ -5,6 +5,9 @@
 - useForm
 - useWhyDidYouUpdate
 - useForceRender
+- useLocalStorage
+- useAsync
+- useAuth
 
 ## useFul link
 
